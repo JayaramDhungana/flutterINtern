@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpodproject/change_notifier_crud/change_notifier_homescreen.dart';
 import 'package:riverpodproject/riverpod_tutorial.dart/home_screen.dart';
 // import 'package:riverpodproject/api_work/api_home_screen.dart';
 // import 'package:riverpodproject/screens/home_screen.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomeScreen(),
+      home: ChangeNotifierHomescreen(),
     );
   }
 }

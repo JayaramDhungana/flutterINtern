@@ -22,7 +22,7 @@ class HomeScreen extends ConsumerWidget {
             context,
             MaterialPageRoute(builder: (context) => AddItem('', '')),
           );
-          ref.read(descriptionprovider.notifier).addItemCome('Add Item');
+          ref.read(descriptionProvider.notifier).addItemCome('Add Item');
           // ref.read(itemProvider.notifier).addItem("New Item");
         },
         child: Icon(Icons.add),
@@ -55,7 +55,7 @@ class HomeScreen extends ConsumerWidget {
                               ),
                             );
                             ref
-                                .read(descriptionprovider.notifier)
+                                .read(descriptionProvider.notifier)
                                 .editItemCome("Edit Item");
                             // ref.read(itemProvider.notifier).updateItem(itemDetail.id, 'updated name');
                           },

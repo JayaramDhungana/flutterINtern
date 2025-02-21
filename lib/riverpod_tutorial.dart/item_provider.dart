@@ -38,7 +38,7 @@ class DescriptionNotifier extends StateNotifier<String> {
   }
 }
 
-final descriptionprovider = StateNotifierProvider<DescriptionNotifier, String>((
+final descriptionProvider = StateNotifierProvider<DescriptionNotifier, String>((
   ref,
 ) {
   return DescriptionNotifier();

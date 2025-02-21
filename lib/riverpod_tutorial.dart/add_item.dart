@@ -4,8 +4,8 @@ import 'package:riverpodproject/riverpod_tutorial.dart/home_screen.dart';
 import 'package:riverpodproject/riverpod_tutorial.dart/item_provider.dart';
 
 class AddItem extends ConsumerWidget {
-  final String forEditItem;
-  final String forEditId;
+  final String? forEditItem;
+  final String? forEditId;
 
   const AddItem(this.forEditId, this.forEditItem, {super.key});
 
@@ -15,10 +15,10 @@ class AddItem extends ConsumerWidget {
       text: forEditItem,
     );
     final formkey = GlobalKey<FormState>();
-    final whichState = ref.watch(descriptionprovider);
-    debugPrint(whichState);
+    final watchForDescriptionProvider = ref.watch(descriptionProvider);
+    debugPrint(watchForDescriptionProvider);
     return Scaffold(
-      appBar: AppBar(title: Text(whichState)),
+      appBar: AppBar(title: Text(watchForDescriptionProvider)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -36,7 +36,9 @@ class AddItem extends ConsumerWidget {
                 },
                 controller: itemController,
 
-                decoration: InputDecoration(label: Text(whichState)),
+                decoration: InputDecoration(
+                  label: Text(watchForDescriptionProvider),
+                ),
               ),
             ),
             ElevatedButton(
@@ -44,7 +46,7 @@ class AddItem extends ConsumerWidget {
                 if (formkey.currentState?.validate() ?? false) {
                   final item = itemController.text;
                   debugPrint(item);
-                  if (whichState == 'Add Item') {
+                  if (watchForDescriptionProvider == 'Add Item') {
                     ref.read(itemProvider.notifier).addItem(item);
                     itemController.clear();
                     Navigator.push(
@@ -59,7 +61,7 @@ class AddItem extends ConsumerWidget {
                   } else {
                     ref
                         .read(itemProvider.notifier)
-                        .updateItem(forEditId, itemController.text);
+                        .updateItem(forEditId!, itemController.text);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -70,7 +72,7 @@ class AddItem extends ConsumerWidget {
                   }
                 }
               },
-              child: Text(whichState),
+              child: Text(watchForDescriptionProvider),
             ),
           ],
         ),
