@@ -11,7 +11,7 @@ class ApiHomeScreen extends StatefulWidget {
 class _ApiHomeScreenState extends State<ApiHomeScreen> {
   //instance of Dio banayeko
   Dio dio = Dio();
-  Map<String, dynamic> apiData = {};
+  List<dynamic> apiData = [];
 
   Future<void> fetchData() async {
     try {
@@ -21,7 +21,7 @@ class _ApiHomeScreenState extends State<ApiHomeScreen> {
       debugPrint("${response.statusCode}");
       if (response.statusCode == 200) {
         setState(() {
-          apiData = response.data['articles'][0];
+          apiData = response.data['articles'];
         });
       }
     } catch (e) {
@@ -38,20 +38,25 @@ class _ApiHomeScreenState extends State<ApiHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("${apiData['author']}  ${apiData.length}")),
-      body: ListTile(
-        focusColor: Colors.amber,
-        onTap: () {
-          debugPrint(apiData['url']);
+      appBar: AppBar(centerTitle: true, title: Text("News")),
+
+      body: ListView.builder(
+        itemCount: apiData.length,
+        itemBuilder: (context, index) {
+          final apiDataDetails = apiData[index];
+          return ListTile(
+            leading: CircleAvatar(
+              backgroundImage: NetworkImage(
+                apiDataDetails['urlToImage'] ??
+                    'https://gizmodo.com/app/uploads/2025/02/GettyImages-2039371693.jpg',
+              ),
+            ),
+            title: Text(apiDataDetails['title']),
+            subtitle: Text(
+              apiDataDetails['author'] ?? 'No Author Details'.toString(),
+            ),
+          );
         },
-        title: Text("${apiData['title']}  \t "),
-        leading: CircleAvatar(
-          backgroundImage: NetworkImage(apiData['urlToImage']),
-        ),
-        subtitle: Text(
-          "${apiData['description']}/n ${apiData['content']}  ${apiData['publishedAt']}",
-        ),
-        trailing: Text("${apiData['source']['name']} "),
       ),
     );
   }
