@@ -20,6 +20,7 @@ class NewsArticleState {
 
 // Create a StateNotifier to handle the fetching logic
 class NewsArticleNotifier extends StateNotifier<NewsArticleState> {
+  //dio ko instance chai banauna parxa
   final Dio dio;
 
   NewsArticleNotifier(this.dio) : super(NewsArticleState());
@@ -29,7 +30,7 @@ class NewsArticleNotifier extends StateNotifier<NewsArticleState> {
       final uri =
           "https://newsapi.org/v2/everything?q=bitcoin&apiKey=b54cfe8c6cc64318943f514f585588c2";
       final response = await dio.get(uri);
-      print(response.statusCode);
+
       if (response.statusCode == 200) {
         final articles =
             (response.data['articles'] as List)

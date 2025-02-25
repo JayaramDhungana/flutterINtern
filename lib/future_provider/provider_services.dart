@@ -11,3 +11,17 @@ final futureProvider = FutureProvider((ref) {
   final services = ProviderServices();
   return services.fetchData();
 });
+
+class StreamProviderServices {
+  Stream<int> showNumbers() async* {
+    for (int i = 0; i < 100; i++) {
+      await Future.delayed(Duration(seconds: 2));
+      yield i;
+    }
+  }
+}
+
+final streamProvider = StreamProvider((r) {
+  final services = StreamProviderServices();
+  return services.showNumbers();
+});

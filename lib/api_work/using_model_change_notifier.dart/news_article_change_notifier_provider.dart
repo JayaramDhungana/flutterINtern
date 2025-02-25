@@ -14,6 +14,7 @@ class NewsArticleNotifier extends ChangeNotifier {
       final uri =
           "https://newsapi.org/v2/everything?q=bitcoin&apiKey=b54cfe8c6cc64318943f514f585588c2";
       final response = await dio.get(uri);
+      print(response.statusCode);
 
       if (response.statusCode == 200) {
         newsArticles =

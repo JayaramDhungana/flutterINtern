@@ -27,7 +27,11 @@ class _ApiHomeScreenUsingModelProviderChangeState
     final newsArticleNotifier = ref.watch(newsArticleProvider);
 
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: const Text("News")),
+      appBar: AppBar(
+        backgroundColor: Colors.grey,
+        centerTitle: true,
+        title: const Text("News using Change Notifier"),
+      ),
       body:
           newsArticleNotifier.error.isNotEmpty
               ? Center(

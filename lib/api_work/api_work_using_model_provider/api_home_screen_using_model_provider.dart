@@ -27,7 +27,10 @@ class _ApiHomeScreenUsingModelProviderState
     final newsArticleState = ref.watch(newsArticleProvider);
 
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: const Text("News")),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("News using State Notifier"),
+      ),
       body:
           newsArticleState.error.isNotEmpty
               ? Center(child: Text(newsArticleState.error))
